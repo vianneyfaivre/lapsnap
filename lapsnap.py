@@ -7,16 +7,25 @@ import time
 from twisted.internet import task, reactor
 import threading
 from time import sleep
+import argparse
+from pathlib import Path
 
-OUT_FOLDER = '/home/vianney/Pictures/Yoga'
-LAP_DURATION_SECONDS = 15
 DEBUG = False
 
-
 def main():
-    folder = createFolder(OUT_FOLDER)
-    startCamera(folder, LAP_DURATION_SECONDS)
+    args = parseArguments()
+    folder = createFolder(args.outputFolder)
+    startCamera(folder, args.lap)
 
+def parseArguments(): 
+    parser = argparse.ArgumentParser(description='Snaps a picture at the end of each lap')
+    
+    parser.add_argument('--lap', help='Lap duration in seconds', type=int, default=10)
+    
+    homeFolder = str(Path.home())
+    parser.add_argument('--outputFolder', help='Where pictures will be saved', type=str, default=homeFolder+'/Pictures/lapsnap')
+    
+    return parser.parse_args()
 
 def createFolder(outFolder):
 

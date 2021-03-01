@@ -11,9 +11,14 @@ A folder will be created with today's date, pictures will be put in that folder.
 
 ## Run (linux)
 
-Run the following commands:
+Install the dependencies
 
 ```
 pip3 install -r requirements.txt
-python3 lapsnap.py
+```
+
+Run! (will snap every 5 seconds)
+
+```
+python3 lapsnap.py --lap=5
 ```
